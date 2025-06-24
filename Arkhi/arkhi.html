@@ -27,10 +27,6 @@
       </div>
       <div class="header-line">
         <label>
-          Al:
-          <input type="text" name="attr_alignment" />
-        </label>
-        <label>
           Classe:
           <input type="text" name="attr_class" />
         </label>
@@ -38,21 +34,32 @@
           Nível:
           <input type="text" name="attr_level" />
         </label>
-      </div>
-      <div class="header-line">
-        <label>
+        <label class="experience">
           XP:
           <input type="text" name="attr_xp" />
+          /
+          <input type="text" name="attr_xpTarget" />
+        </label>
+        <!-- <label>
+          XP(Meta):
+        </label> -->
+      </div>
+      <div class="header-line">
+
+        <label>
+          Al:
+          <input type="text" name="attr_alignment" />
+        </label>
+        <label>
+          Facção:
+          <input type="text" name="attr_faction" />
         </label>
         <label>
           XP(+%):
           <input type="text" name="attr_xpBonus" />
         </label>
-        <label>
-          XP(Meta):
-          <input type="text" name="attr_xpTarget" />
-        </label>
       </div>
+
     </div>
     <!-- End of Header -->
   </div>
@@ -64,43 +71,48 @@
         <h3>Atributos</h3>
         <div class="attributes-content">
           <div class="attributes-line">
-            <button title="Ataque corpo a corpo, Dano, abrir portas"
-              value="&{template:default} {{name=@{character_name} testa Força}} {{resultado=[[ [[1d20]]<@{str} ]]}} {{alvo=[[@{str}]]}}">For</button>
+            <button title="Ataque corpo a corpo, Dano, abrir portas" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Força}} {{result=[[1d20]]}} {{target=[[@{str}]]}}">For</button>
             <input type="text" name="attr_str" class="attribute-input" />
             <input hidden readonly id="ability-strength-modifier" name="attr_strMod" value="0" />
             <input readonly id="ability-strength-modifier" name="attr_maskedStrMod" value="0" />
           </div>
 
           <div class="attributes-line">
-            <button title="Idiomas/erudição">Int</button>
+            <button title="Idiomas/erudição" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Inteligência}} {{result=[[1d20]]}} {{target=[[@{int}]]}}">Int</button>
             <input type="text" name="attr_int" class="attribute-input" />
             <input hidden readonly id="ability-intelligence-modifier" name="attr_intMod" value="0" />
             <input readonly id="ability-intelligence-modifier" name="attr_maskedIntMod" value="0" />
           </div>
 
           <div class="attributes-line">
-            <button title="Proteção x Feitiços">Sab</button>
+            <button title="Proteção x Feitiços" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Sabedoria}} {{result=[[1d20]]}} {{target=[[@{wis}]]}}">Sab</button>
             <input type="text" name="attr_wis" class="attribute-input" />
             <input hidden readonly id="ability-wisdom-modifier" name="attr_wisMod" value="0" />
             <input readonly id="ability-wisdom-modifier" name="attr_maskedWisMod" value="0" />
           </div>
 
           <div class="attributes-line">
-            <button title="Ataque à distância CA, iniciativa">Des</button>
+            <button title="Ataque à distância CA, iniciativa" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Destreza}} {{result=[[1d20]]}} {{target=[[@{dex}]]}}">Des</button>
             <input type="text" name="attr_dex" class="attribute-input" />
             <input hidden readonly id="ability-dexterity-modifier" name="attr_dexMod" value="0" />
             <input readonly id="ability-dexterity-modifier" name="attr_maskedDexMod" value="0" />
           </div>
 
           <div class="attributes-line">
-            <button title="Pontos de vida">Con</button>
+            <button title="Pontos de vida" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Constituição}} {{result=[[1d20]]}} {{target=[[@{con}]]}}">Con</button>
             <input type="text" name="attr_con" class="attribute-input" />
             <input hidden readonly id="ability-constitution-modifier" name="attr_conMod" value="0" />
             <input readonly id="ability-constitution-modifier" name="attr_maskedConMod" value="0" />
           </div>
 
           <div class="attributes-line">
-            <button title="Reações, auxiliares, lealdade">Car</button>
+            <button title="Reações, auxiliares, lealdade" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Carisma}} {{result=[[1d20]]}} {{target=[[@{cha}]]}}">Car</button>
             <input type="text" name="attr_cha" class="attribute-input" />
             <input hidden readonly id="ability-charisma-modifier" name="attr_chaMod" value="0" />
             <input readonly id="ability-charisma-modifier" name="attr_maskedChaMod" value="0" />
@@ -117,7 +129,7 @@
           <div class="saves-line">
             <input type="text" name="attr_saveDeath" />
             <button title="Morte, veneno" type="roll" name="attr_rollSaveDeath"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Morte}} {{resultado=[[ [[1d20]]>@{saveDeath} ]]}} {{alvo=[[@{saveDeath}]]}}"
+              value="&{template:roll-over} {{name=@{character_name} faz jogada de proteção contra Morte}} {{result=[[1d20]]}} {{target=[[@{saveDeath}]]}}"
               class="save-button">
               Morte
             </button>
@@ -125,7 +137,7 @@
           <div class="saves-line">
             <input type="text" name="attr_saveWands" />
             <button title="Varinhas mágicas" type="roll" name="attr_rollSaveWands"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Varinhas}} {{resultado=[[ [[1d20]]>@{saveWands} ]]}} {{alvo=[[@{saveWands}]]}}"
+              value="&{template:roll-over} {{name=@{character_name} faz jogada de proteção contra Varinhas}} {{result=[[1d20]]}} {{target=[[@{saveWands}]]}}"
               class="save-button">
               Varinhas
             </button>
@@ -133,7 +145,7 @@
           <div class="saves-line">
             <input type="text" name="attr_saveParalysis" />
             <button title="Paralisia, petrificação" type="roll" name="attr_rollSaveParalysis"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Paralisia}} {{resultado=[[ [[1d20]]>@{saveParalysis} ]]}} {{alvo=[[@{saveParalysis}]]}}"
+              value="&{template:roll-over} {{name=@{character_name} faz jogada de proteção contra Paralisia}} {{result=[[1d20]]}} {{target=[[@{saveParalysis}]]}}"
               class="save-button">
               Paralisia
             </button>
@@ -141,7 +153,7 @@
           <div class="saves-line">
             <input type="text" name="attr_saveBreath" />
             <button title="Ataque de Sopro" type="roll" name="attr_rollSaveBreath"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Ataque de Sopro}} {{resultado=[[ [[1d20]]>@{saveBreath} ]]}} {{alvo=[[@{saveBreath}]]}}"
+              value="&{template:roll-over} {{name=@{character_name} faz jogada de proteção contra Sopro}} {{result=[[1d20]]}} {{target=[[@{saveBreath}]]}}"
               class="save-button">
               Sopro
             </button>
@@ -149,18 +161,17 @@
           <div class="saves-line">
             <input type="text" name="attr_saveSpell" />
             <button title="Feitiços cetros e cajados mágicos" type="roll" name="attr_rollSaveSpell"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Feitiço}} {{resultado=[[ [[1d20]]>@{saveSpell} ]]}} {{alvo=[[@{saveSpell}]]}}"
+              value="&{template:roll-over} {{name=@{character_name} faz jogada de proteção contra Feitiço}} {{result=[[1d20]]}} {{target=[[@{saveSpell}]]}}"
               class="save-button">
               Feitiço
             </button>
           </div>
           <div class="saves-line">
             <input readonly type="text" name="attr_saveSpellBonus" />
-            <button title="Modificador de SAB Para Proteção x Feitiços" type="roll" name="attr_rollSaveSpellBonus"
-              value="&{template:default} {{name=@{character_name} faz jogada de proteção contra Feitiço}} {{resultado=[[ [[1d20]]>@{saveSpell} ]]}} {{alvo=[[@{saveSpell}]]}}"
+            <span title="Modificador de SAB Para Proteção x Feitiços" type="roll" name="attr_rollSaveSpellBonus"
               class="save-button">
               +-
-            </button>
+            </span>
           </div>
         </div>
       </div>
@@ -184,27 +195,31 @@
         <h3>Aventurando-se</h3>
         <div class="adventuring-content">
           <div class="adventuring-line">
-            <button title="Ouvir Ruídos (1-em-6 ou por Classe)">OR</button>
+            <button title="Ouvir Ruídos (1-em-6 ou por Classe)" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Ouvir Ruídos}} {{result=[[1d6]]}} {{target=[[@{hearNoise}]]}}">OR</button>
             <label>
-              <input type="text" name="attr_exploration" class="adventuring-input" />
+              <input type="text" name="attr_hearNoise" class="adventuring-input" value="1" />
             </label>
           </div>
           <div class="adventuring-line">
-            <button title="Abrir porta (baseado em FOR)">AP</button>
+            <button title="Abrir porta (baseado em FOR)" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Abrir Porta}} {{result=[[1d6]]}} {{target=[[@{openDoor}]]}}">AP</button>
             <label>
-              <input type="text" name="attr_navigation" class="adventuring-input" />
+              <input type="text" name="attr_openDoor" class="adventuring-input" />
             </label>
           </div>
           <div class="adventuring-line">
-            <button title="Encontrar Passagens Secretas (1-em-6 ou por Classe)">PS</button>
+            <button title="Encontrar Passagens Secretas (1-em-6 ou por Classe)" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Encontrar Passagens Secretas}} {{result=[[1d6]]}} {{target=[[@{FindSecretDoor}]]}}">PS</button>
             <label>
-              <input type="text" name="attr_tracking" class="adventuring-input" />
+              <input type="text" name="attr_findSecretDoor" class="adventuring-input" value="1" />
             </label>
           </div>
           <div class="adventuring-line">
-            <button title="Encontrar Armadilhas (1-em-6 ou por Classe)">AR</button>
+            <button title="Encontrar Armadilhas (1-em-6 ou por Classe)" type="roll"
+              value="&{template:roll-under} {{name=@{character_name} testa Encontrar Armadilhas}} {{result=[[1d6]]}} {{target=[[@{findRoomTrap}]]}}">AR</button>
             <label>
-              <input type="text" name="attr_tracking" class="adventuring-input" />
+              <input type="text" name="attr_findRoomTrap" class="adventuring-input" value="1" />
             </label>
           </div>
         </div>
@@ -250,14 +265,16 @@
         <h3>Encontros</h3>
         <div class="encounters-content">
           <div class="encounters-line">
+            <button title="Modificador de DES para Iniciativa (opcional)">Iniciativa</button>
             <label>
-              <span title="Modificador de DES para Iniciativa (opcional)">Iniciativa</span>
-              <input readonly type="text" name="attr_initiative" class="encounter-input" />
+              <input readonly type="text" name="attr_initMod" class="encounter-input" />
             </label>
           </div>
           <div class="encounters-line">
+            <button title="Modificador de CAR para Jogadas de Reação" type="roll"
+              value="&{template:default} {{name=Rolagem de Reação}} {{Resultado=[[2D6+@{reaction}]]}}">Reação
+              +-</button>
             <label>
-              <span title="Modificador de CAR para Jogadas de Reação">Reação +-</span>
               <input readonly type="text" name="attr_reaction" class="encounter-input" />
             </label>
           </div>
@@ -293,7 +310,7 @@
                 <span title="Pontos de Vida máximos">MAX</span><input type="text" name="attr_pvMax" />
               </label>
               <label><span title="Modificador de CON, Pontos de Vida">+-</span><input readonly type="text"
-                  name="attr_pvBonus" /></label>
+                  name="attr_hpBonus" /></label>
             </div>
           </div>
           <div class="combat-line">
@@ -307,8 +324,8 @@
             </div>
           </div>
           <div class="combat-line">
-            <label><span title="Modificador de FOR. ataque/dano">Atq</span><input readonly type="text" name="attr_ba"
-                value="0" /></label>
+            <label><span title="Modificador de FOR. ataque/dano">Atq</span><input readonly type="text"
+                name="attr_meleeStrBonus" value="0" /></label>
             <div class="combat-extra-info">
               <label><span title="Modificador de DES para ataques à distância">Dis</span><input readonly type="text"
                   name="attr_rangedDexBonus" value="0" /></label>
@@ -434,6 +451,7 @@
             <select name="attr_attackType">
               <option value="melee">Corpo a Corpo</option>
               <option value="ranged">A Distância</option>
+              <option value="melee-thief">Ladrão (C a C)</option>
             </select>
           </div>
           <div id="weapon-attack-bonus">
@@ -447,6 +465,10 @@
           <div id="weapon-damage-bonus">
             <span>+Dano</span>
             <input type="number" name="attr_weaponDamageBonus" value="0" />
+          </div>
+          <div id="weapon-weight">
+            <span>Peso</span>
+            <input type="number" name="attr_weaponWeight" value="0" />
           </div>
         </div>
         <input id="weapon-description" type="text" name="attr_weaponDescription" class="weapon-description"
@@ -838,6 +860,40 @@
     </tbody>
   </table>
 </rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-roll-under">
+  <div class="sheet-template-container">
+    <div class="sheet-template-header">{{name}}</div>
+    <!-- Mostra apenas o resultado da rolagem -->
+    <div class="sheet-template-result">
+      <span>{{result}}</span>
+    </div>
+    <!-- Avaliação de sucesso ou falha -->
+    {{#^rollGreater() result target}}
+    <div class="sheet-template-outcome-success">Success</div>
+    {{/^rollGreater() result target}}
+    {{#rollGreater() result target}}
+    <div class="sheet-template-outcome-failure">Failure</div>
+    {{/rollGreater() result target}}
+  </div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-roll-over">
+  <div class="sheet-template-container">
+    <div class="sheet-template-header">{{name}}</div>
+    <!-- Mostra apenas o resultado da rolagem -->
+    <div class="sheet-template-result">
+      <span>{{result}}</span>
+    </div>
+    <!-- Avaliação de sucesso ou falha -->
+    {{#^rollLess() result target}}
+    <div class="sheet-template-outcome-success">Success</div>
+    {{/^rollLess() result target}}
+    {{#rollLess() result target}}
+    <div class="sheet-template-outcome-failure">Failure</div>
+    {{/rollLess() result target}}
+  </div>
+</rolltemplate>
 <!-- END OF ROLLTEMPLATES -->
 <!-- SCRIPTS -->
 <script type="text/worker">
@@ -897,17 +953,25 @@
       } else if (value >= 16 && value <= 17) {
         return modifiers[5];
       } else {
-      return modifiers[6];
+        return modifiers[6];
       }
     }
 
     on("sheet:opened change:str", function () {
       getAttrs(["str"], function (values) {
-        const strMod = getModifiers(values.str);
+        const [strMod, openDoor] = getModifiers(values.str, [
+        [-3, 1],
+        [-2, 1],
+        [-1, 1],
+        [0, 2],
+        [1, 3],
+        [2, 4],
+        [3, 5],
+      ]);
         let maskedStrMod = strMod;
         if (strMod > 0) maskedStrMod = `+${strMod}`;
         maskedStrMod = `(${maskedStrMod})`
-        setAttrs({ strMod, maskedStrMod  });
+        setAttrs({ strMod, maskedStrMod, openDoor, meleeStrBonus: strMod});
       });
     });
 
@@ -927,17 +991,25 @@
         let maskedWisMod = wisMod;
         if (wisMod > 0) maskedWisMod = `+${wisMod}`;
         maskedWisMod = `(${maskedWisMod})`
-        setAttrs({ wisMod, maskedWisMod  });
+        setAttrs({ wisMod, maskedWisMod, saveSpellBonus: wisMod  });
       });
     });
 
     on("sheet:opened change:dex", function () {
       getAttrs(["dex"], function (values) {
-        const dexMod = getModifiers(values.dex);
+        const [dexMod, initMod] = getModifiers(values.dex, [
+          [-3, -2],
+          [-2, -1],
+          [-1, -1],
+          [0, 0],
+          [1, 1],
+          [2, 1],
+          [3, 2],
+        ]);
         let maskedDexMod = dexMod;
         if (dexMod > 0) maskedDexMod = `+${dexMod}`;
         maskedDexMod = `(${maskedDexMod})`
-        setAttrs({ dexMod, maskedDexMod  });
+        setAttrs({ dexMod, maskedDexMod, initMod, acDexBonus: dexMod, rangedDexBonus: dexMod  });
       });
     });
 
@@ -947,19 +1019,27 @@
         let maskedConMod = conMod;
         if (conMod > 0) maskedConMod = `+${conMod}`;
         maskedConMod = `(${maskedConMod})`
-        setAttrs({ conMod, maskedConMod  });
+        setAttrs({ conMod, maskedConMod, hpBonus: conMod  });
       });
     });
 
     on("sheet:opened change:cha", function () {
       getAttrs(["cha"], function (values) {
-        const chaMod = getModifiers(values.cha);
+        const [chaMod, retainersMax, retainersLoyalty] = getModifiers(values.cha, [
+          [-2, 1, 4],
+          [-1, 2, 5],
+          [-1, 3, 6],
+          [0, 4, 7],
+          [1, 5, 8],
+          [1, 6, 9],
+          [2, 7, 10]
+        ]);
         let maskedChaMod = chaMod;
         if (chaMod > 0) maskedChaMod = `+${chaMod}`;
         maskedChaMod = `(${maskedChaMod})`
-        setAttrs({ chaMod, maskedChaMod  });
-      });
-    });
+        setAttrs({ chaMod, maskedChaMod, retainersMax, retainersLoyalty, reaction: chaMod })
+      })
+    })
 
     on("sheet:opened change:repeating_weapons:attackType change:strMod", function () {
         getSectionIDs("repeating_weapons", function (idArray) {
